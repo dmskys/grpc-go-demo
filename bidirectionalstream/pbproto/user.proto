@@ -1,0 +1,31 @@
+syntax = "proto3";    // 指定语法格式，注意 proto3 不再支持 proto2 的 required 和 optional
+package pbproto;        // 指定生成的 user.pb.go 的包名，防止命名冲突
+
+
+//# protoc 编译器的 grpc 插件会处理 service 字段定义的 UserInfoService
+//# 使 service 能编码、解码 message
+//$ protoc -I . --go_out=plugins=grpc:. ./user.proto
+
+// service 定义开放调用的服务，即 UserInfoService 微服务
+service UserInfoService {
+    // 微服务中获取用户信息的 RPC 函数
+    // stream 关键字表示此函数将发送数据流
+    rpc GetUserInfo (stream UserRequest) returns (stream UserResponse);
+}
+
+
+// message 对应生成代码的 struct
+// 定义客户端请求的数据格式
+message UserRequest {
+    // [修饰符] 类型 字段名 = 标识符;
+    int32 uid = 1;
+}
+
+
+// 定义服务端响应的数据格式
+message UserResponse {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+    repeated string title = 4;    // repeated 修饰符表示字段是可变数组，即 slice 类型
+}

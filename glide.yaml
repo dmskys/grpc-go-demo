@@ -1,0 +1,20 @@
+package: grpcdemo
+import:
+- package: google.golang.org/genproto
+- package: github.com/go-stack/stack
+- package: golang.org/x/net
+- package: golang.org/x/text
+- package: google.golang.org/grpc
+- package: github.com/golang/protobuf
+  version: ^1.1.0
+  subpackages:
+  - protoc-gen-go
+- package: github.com/go-kit/kit
+  version: ^0.7.0
+- package: github.com/kujtimiihoxha/kit
+- package: github.com/coreos/etcd
+  version: ^3.3.5
+- package: github.com/gogo/protobuf
+  version: ^1.0.0
+  subpackages:
+  - gogoproto
